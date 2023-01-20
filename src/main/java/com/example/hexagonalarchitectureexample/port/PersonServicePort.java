@@ -12,7 +12,7 @@ public interface PersonServicePort {
 	
 	Person save(Person person);
 	
-	Person update(Person person);
+	Person update(Person person, Long id);
 	
 	void deleteById(Long id);
 	

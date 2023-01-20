@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.example.hexagonalarchitectureexample.domain.Person;
 import com.example.hexagonalarchitectureexample.domain.enums.PersonNationality;
 
 @Entity
@@ -61,4 +62,11 @@ public class PersonEntity {
 		return nationality;
 	}
 	
+	public Person toDomain() {
+		return new Person(this.id, this.name, this.address, this.age, this.nationality);
+	}
+	
+	public static PersonEntity fromDomain(Long id, Person person) {
+		return new PersonEntity(id, person.name(), person.address(), person.age(), person.nationality());
+	}
 }
