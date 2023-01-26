@@ -16,5 +16,5 @@ public interface PersonServicePort {
 	
 	void deleteById(Long id);
 	
-	Boolean publish(Person person) throws Exception;
+	void publish(Person person) throws Exception;
 }

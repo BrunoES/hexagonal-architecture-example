@@ -1,10 +1,13 @@
 package com.example.hexagonalarchitectureexample.service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.example.hexagonalarchitectureexample.adapter.inbound.dto.PersonDTO;
 import com.example.hexagonalarchitectureexample.adapter.outbound.persistence.entity.PersonEntity;
 import com.example.hexagonalarchitectureexample.domain.Person;
+import com.example.hexagonalarchitectureexample.port.KafkaProducerServicePort;
 import com.example.hexagonalarchitectureexample.port.PersonRepositoryPort;
 import com.example.hexagonalarchitectureexample.port.PersonServicePort;
 
@@ -12,9 +15,12 @@ public class PersonServiceImpl implements PersonServicePort {
 
 	private final PersonRepositoryPort personRepository;
 	
-	public PersonServiceImpl(PersonRepositoryPort personRepository) {
+	private final KafkaProducerServicePort<PersonDTO> kafkaProducerService;
+	
+	public PersonServiceImpl(PersonRepositoryPort personRepository, KafkaProducerServicePort<PersonDTO> kafkaProducerService) {
 		super();
 		this.personRepository = personRepository;
+		this.kafkaProducerService = kafkaProducerService;
 	}
 
 	@Override
@@ -44,9 +50,10 @@ public class PersonServiceImpl implements PersonServicePort {
 	}
 
 	@Override
-	public Boolean publish(Person person) throws Exception {
-		// Chamar adapter Kafka para publicar pessoa na fila.
-		return null;
+	public void publish(Person person) throws Exception {
+		String key = UUID.randomUUID().toString();
+		PersonDTO personDTO = new PersonDTO(person.id(), person.name(), person.address(), person.age());
+		kafkaProducerService.send("MEUUSADO.ANNOUNCEMENT-VALIDATION", key, personDTO);
 	}
 
 }
