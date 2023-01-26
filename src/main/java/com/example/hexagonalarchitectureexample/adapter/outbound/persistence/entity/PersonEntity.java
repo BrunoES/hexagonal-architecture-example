@@ -33,6 +33,11 @@ public class PersonEntity {
 	@Column(name="NATIONALITY")
 	private PersonNationality nationality;
 
+	
+	public PersonEntity() {
+		super();
+	}
+
 	public PersonEntity(Long id, String name, String address, Integer age, PersonNationality nationality) {
 		super();
 		this.id = id;

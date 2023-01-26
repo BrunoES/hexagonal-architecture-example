@@ -1,10 +1,10 @@
-package com.example.hexagonalarchitectureexample.configuration;
+package com.example.hexagonalarchitectureexample.adapter.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.example.hexagonalarchitectureexample.HexagonalArchitectureExampleApplication;
+import com.example.hexagonalarchitectureexample.adapter.HexagonalArchitectureExampleApplication;
 import com.example.hexagonalarchitectureexample.adapter.outbound.persistence.repository.postgress.PostgressPersonRepository;
 import com.example.hexagonalarchitectureexample.service.PersonServiceImpl;
 
