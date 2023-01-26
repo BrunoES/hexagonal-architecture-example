@@ -53,7 +53,7 @@ public class PersonServiceImpl implements PersonServicePort {
 	public void publish(Person person) throws Exception {
 		String key = UUID.randomUUID().toString();
 		PersonDTO personDTO = new PersonDTO(person.id(), person.name(), person.address(), person.age());
-		kafkaProducerService.send("MEUUSADO.ANNOUNCEMENT-VALIDATION", key, personDTO);
+		kafkaProducerService.send("KAFKA-EXAMPLE.QUEUE", key, personDTO);
 	}
 
 }
